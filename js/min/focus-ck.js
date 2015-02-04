@@ -1,0 +1,1 @@
+$(document).ready(function(){$("#focus").keypress(function(e){13===e.which&&($(".focuses h3").text($("#focus").val()),$("#focus").val(""),$(".what").fadeOut(),$("#focus").fadeOut(),$(".focuses").fadeIn(1e3))})});

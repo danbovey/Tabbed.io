@@ -1,0 +1,1 @@
+$(document).ready(function(){function e(){$("#menu").toggleClass("is-visible"),$("#menu-screen").toggleClass("is-visible")}$("#menu-btn").on("click touchstart",function(n){e(),n.preventDefault()}),$("#menu-screen").on("click touchstart",function(n){e(),n.preventDefault()})});

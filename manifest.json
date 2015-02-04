@@ -1,0 +1,31 @@
+{
+  "manifest_version": 2,
+
+  "name": "Tabbed.io",
+  "description": "A personalised landing page for your browser",
+  "version": "0.5.2",
+
+  "offline_enabled": true,
+
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+
+  "permissions": [
+    "activeTab",
+    "*://*.tabbed.io/*"
+  ],
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.tabbed.io/*"],
+      "js": ["js/extension.js"]
+    }
+  ],
+
+  "chrome_url_overrides" : {
+    "newtab": "index.html"
+  }
+}

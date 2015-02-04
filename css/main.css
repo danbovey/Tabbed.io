@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+html, body {
+  height: 100%; }
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-family: HelveticaNeue-Medium, 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
+
+.top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%; }
+
+.center {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  display: block;
+  width: 100%;
+  text-align: center;
+  -webkit-transform: translate(-50%, -50%);
+  -webkit-transform-origin: 50% 50%; }
+
+.bottom {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  display: block;
+  width: 100%;
+  text-align: center;
+  -webkit-transform: translate(-50%, -50%);
+  -webkit-transform-origin: 50% 50%; }
+
+.widget {
+  display: none; }
+  .widget h1, .widget h2, .widget h3, .widget h4, .widget h5, .widget h6 {
+    font-weight: lighter;
+    text-align: center;
+    text-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px;
+    color: #FFF; }
+
+.clock h1 {
+  font-size: 180px;
+  letter-spacing: -5px; }
+
+.date h2 {
+  font-size: 40px;
+  letter-spacing: -1px; }
+
+canvas {
+  display: none; }
+
+#menu-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 28px;
+  text-decoration: none;
+  color: #FFF;
+  -webkit-transform: scale(1.3, 1);
+  transform: scale(1.3, 1); }
+
+#menu {
+  position: fixed;
+  top: 0px;
+  right: auto;
+  bottom: 0px;
+  left: 0px;
+  width: 220px;
+  height: 100%;
+  -webkit-transform: translateX(-220px);
+  transform: translateX(-220px);
+  -webkit-transition: all .25s linear;
+  transition: all .25s linear;
+  background: #333;
+  z-index: 999;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; }
+  #menu li h1 {
+    color: #FFF;
+    padding: .5em 1em;
+    display: inline-block; }
+    #menu li h1 small {
+      font-size: 14px; }
+  #menu li a {
+    border-bottom: 1px solid #222;
+    color: #FFF;
+    display: block;
+    padding: 1em;
+    font-size: 0.9em;
+    text-decoration: none; }
+    #menu li a:hover {
+      background-color: #404040; }
+  #menu.is-visible {
+    -webkit-transform: translateX(0);
+    transform: translateX(0); }
+
+#menu-screen {
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background: #222;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+  -webkit-transition: all .25s linear;
+  transition: all .25s linear; }
+  #menu-screen.is-visible {
+    opacity: .5;
+    visibility: visible; }
