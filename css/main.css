@@ -128,12 +128,12 @@ input {
 #btn-customwallpaper {
   display: none; }
 
-#btn-countdown {
+#btn-countdowntimer {
   display: none;
   padding-left: 12px; }
-  #btn-countdown img {
+  #btn-countdowntimer img {
     margin: -12px 0 0 -12px; }
-  #btn-countdown.rotating img {
+  #btn-countdowntimer.rotating img {
     -webkit-animation: rotateGlass 4s infinite ease-in-out;
             animation: rotateGlass 4s infinite ease-in-out; }
 
