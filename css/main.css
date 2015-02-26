@@ -131,7 +131,9 @@ input {
     height: 28px; }
   .icon svg {
     width: 24px;
-    height: 24px; }
+    height: 24px;
+    -webkit-filter: drop-shadow(-2px -2px 7px #000);
+            filter: drop-shadow(-2px -2px 7px #000); }
   .icon svg * {
     -webkit-transition: all 1s ease-in-out;
             transition: all 1s ease-in-out; }
