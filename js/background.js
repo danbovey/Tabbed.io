@@ -1,42 +1,10 @@
 $(function() {
 	function getWallpaper() {
 		if(localStorage.getItem('customwallpaper') == 1 && localStorage.getItem('customwallpaperurl') != null && localStorage.getItem('customwallpaperurl') != '') {
-			var img = new Image();
-			img.src = localStorage.getItem('customwallpaperurl');
-			var colorSum = 0;
+			var url = localStorage.getItem('customwallpaperurl');
 
-			img.onload = function() {
-				var canvas = document.createElement('canvas');
-				canvas.width = 1920;
-				canvas.height = 1080;
-				document.body.appendChild(canvas);
-				var context = canvas.getContext('2d');
-				context.drawImage(img, 0, 0);
-
-				var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
-				var data = brightnessImageData.data;
-				var r, g, b, avg;
-
-				for(var x = 0, len = data.length; x < len; x += 4) {
-					r = data[x];
-					g = data[x + 1];
-					b = data[x + 2];
-
-					avg = Math.floor((r + g + b) / 3);
-					colorSum += avg;
-				}
-
-				var brightness = Math.floor(colorSum / (this.width*this.height));
-				
-				if(brightness > 150) {
-					$('body').addClass('black');
-				} else {
-					$('body').removeClass('black');
-				}
-
-				$('body').css('background-image', 'url(' + img.src + ')');
-				$('#input-customwallpaper').val(img.src);
-			};
+			$('body').css('background-image', 'url(' + url + ')');
+			$('#input-customwallpaper').val(url);
 		} else {
 			var imageData;
 
@@ -99,11 +67,7 @@ $(function() {
 				var colorSum = 0;
 
 				img.onload = function() {
-					var canvas = document.createElement('canvas');
-					canvas.width = 1920;
-					canvas.height = 1080;
-					document.body.appendChild(canvas);
-					var context = canvas.getContext('2d');
+					canvas = document.getElementsByTagName('canvas')[0];
 					context.drawImage(img, 0, 0);
 
 					var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -134,30 +98,6 @@ $(function() {
 	}
 	getWallpaper();
 
-	function b64toBlob(b64Data, contentType, sliceSize) {
-		contentType = contentType || '';
-		sliceSize = sliceSize || 512;
-
-		var byteCharacters = atob(b64Data);
-		var byteArrays = [];
-
-		for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-			var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-			var byteNumbers = new Array(slice.length);
-			for (var i = 0; i < slice.length; i++) {
-				byteNumbers[i] = slice.charCodeAt(i);
-			}
-
-			var byteArray = new Uint8Array(byteNumbers);
-
-			byteArrays.push(byteArray);
-		}
-
-		var blob = new Blob(byteArrays, {type: contentType});
-		return blob;
-	}
-
 	$('#btn-refresh').click(function(e) {
 		localStorage.setItem('customwallpaper', 0);
 		customwallpaper = 0;
@@ -184,3 +124,27 @@ $(function() {
 		}
 	});
 });
+
+function b64toBlob(b64Data, contentType, sliceSize) {
+	contentType = contentType || '';
+	sliceSize = sliceSize || 512;
+
+	var byteCharacters = atob(b64Data);
+	var byteArrays = [];
+
+	for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+		var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+		var byteNumbers = new Array(slice.length);
+		for (var i = 0; i < slice.length; i++) {
+			byteNumbers[i] = slice.charCodeAt(i);
+		}
+
+		var byteArray = new Uint8Array(byteNumbers);
+
+		byteArrays.push(byteArray);
+	}
+
+	var blob = new Blob(byteArrays, {type: contentType});
+	return blob;
+}

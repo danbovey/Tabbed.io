@@ -7,7 +7,7 @@
 
 html, body {
   height: 100%;
-  overflow-y: hidden; }
+  overflow: hidden; }
 
 body {
   font-family: HelveticaNeue-Medium, 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -141,9 +141,9 @@ input {
 .black .icon svg * {
   stroke: #000; }
 
-#btn-refresh img {
+#btn-refresh svg {
   margin: -12px 0 0 -12px; }
-#btn-refresh.rotating img {
+#btn-refresh.rotating svg {
   -webkit-animation: spin 2s linear infinite;
           animation: spin 2s linear infinite; }
 
@@ -162,9 +162,9 @@ input {
 #btn-countdowntimer {
   display: none;
   padding-left: 12px; }
-  #btn-countdowntimer img {
+  #btn-countdowntimer svg {
     margin: -12px 0 0 -12px; }
-  #btn-countdowntimer.rotating img {
+  #btn-countdowntimer.rotating svg {
     -webkit-animation: rotateGlass 4s infinite ease-in-out;
             animation: rotateGlass 4s infinite ease-in-out; }
 
