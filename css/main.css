@@ -72,12 +72,16 @@ input {
 .black .widget h1, .black .widget h2, .black .widget h3, .black .widget h4, .black .widget h5, .black .widget h5 {
   color: #000; }
 
-.clock h1 {
-  font-size: 180px;
-  letter-spacing: -5px; }
-  .clock h1.flashing {
-    -webkit-animation: blink 1s steps(5, start) infinite;
-            animation: blink 1s steps(5, start) infinite; }
+.clock {
+  display: inline-block;
+  position: relative; }
+  .clock h1 {
+    display: inline-block;
+    font-size: 180px;
+    letter-spacing: -5px; }
+    .clock h1.flashing {
+      -webkit-animation: blink 1s steps(5, start) infinite;
+              animation: blink 1s steps(5, start) infinite; }
 
 .light .clock h1 {
   font-family: 'Lato', sans-serif; }
@@ -198,6 +202,14 @@ input {
 #countdown input {
   padding: 10px;
   width: 50px; }
+
+#countdown-stop {
+  display: none;
+  position: absolute;
+  right: -70px;
+  top: 41%; }
+  #countdown-stop.active {
+    display: block; }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {

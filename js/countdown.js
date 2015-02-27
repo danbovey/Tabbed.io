@@ -4,7 +4,13 @@ $(function() {
 		$('#input-minutes').focus();
 
 		e.preventDefault();
-	})
+	});
+
+	$('#countdown-stop').click(function(e) {
+		cancelCountdown();
+
+		e.preventDefault();
+	});
 
 	$('#input-minutes').keypress(function(e) {
 		if(e.keyCode === 13) {
@@ -19,27 +25,42 @@ $(function() {
 	});
 
 	function startCountdown() {
-		if(!isNaN($('#input-minutes').val()) && !isNaN($('#input-seconds').val())) {
-			if($('#input-minutes').val() > (24 * 60) && $('#input-seconds').val() > (24 * 60 * 60)) {
-				$('#countdown .error').text('Cannot countdown over 24 hours').show();
-			} else if($('#input-minutes').val() < 1 || $('#input-seconds').val() < 1) {
-				$('#countdown .error').text('Number must be positive').show();
-			} else {
-				$('#countdown .error').hide();
+		minutes = $('#input-minutes').val() * 60;
+		seconds = $('#input-seconds').val();
 
-				window.clearTimeout(cancelCounter);
+		if(minutes.length === 0) {
+			minutes = 0;
+		} else if(!isNaN(minutes)) {
+			minutes = +minutes;
+		} else {
+			$('#countdown .error').text('Must be a number').show();
+			return;
+		}
+		if(seconds.length === 0) {
+			seconds = 0;
+		} else if(!isNaN(seconds)) {
+			seconds = +seconds;
+		} else {
+			$('#countdown .error').text('Must be a number').show();
+			return;
+		}
 
-				minutes = $('#input-minutes').val() * 60;
-				seconds = $('#input-seconds').val();
+		if(minutes > (24 * 60) && seconds > (24 * 60 * 60)) {
+			$('#countdown .error').text('Cannot countdown over 24 hours').show();
+		} else if(minutes < 0 || seconds < 0) {
+			$('#countdown .error').text('Number must be positive').show();
+		} else {
+			$('#countdown .error').hide();
 
-				count = +minutes + +seconds;
+			window.clearTimeout(cancelCounter);
 
-				countdown();
+			count = minutes + seconds;
 
-				$('#btn-countdowntimer').addClass('rotating');
+			countdown();
 
-				popout();
-			}
+			$('#btn-countdowntimer').addClass('rotating');
+
+			popout();
 		}
 	}
 
@@ -52,11 +73,14 @@ $(function() {
 		window.clearInterval(counter);
 		counter = null;
 		$('.clock h1').removeClass('flashing');
+		$('#countdown-stop').removeClass('active');
 		$('#btn-countdowntimer').removeClass('rotating');
 		audio.pause();
 	}
 
 	function timer() {
+		$('#countdown-stop').addClass('active');
+
 		count = count - 1;
 
 		if(count <= 0) {
