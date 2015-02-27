@@ -1,33 +1,47 @@
 $(function() {
 	$('#btn-countdowntimer').click(function(e) {
 		popout('countdown');
-		$('#input-countdown').focus();
+		$('#input-minutes').focus();
 
 		e.preventDefault();
 	})
 
-	$('#input-countdown').keypress(function(e) {
+	$('#input-minutes').keypress(function(e) {
 		if(e.keyCode === 13) {
-			if(!isNaN($(this).val())) {
-				if($(this).val() > (24 * 60 * 60)) {
-					$('#countdown .error').text('Cannot countdown over 24 hours').show();
-				} else if($(this).val() < 1) {
-					$('#countdown .error').text('Number must be positive').show();
-				} else {
-					$('#countdown .error').hide();
-
-					window.clearTimeout(cancelCounter);
-
-					count = $(this).val();
-					countdown();
-
-					$('#btn-countdowntimer').addClass('rotating');
-
-					popout();
-				}
-			}
+			startCountdown(e.keyCode);
 		}
 	});
+
+	$('#input-seconds').keypress(function(e) {
+		if(e.keyCode === 13) {
+			startCountdown(e.keyCode);
+		}
+	});
+
+	function startCountdown() {
+		if(!isNaN($('#input-minutes').val()) && !isNaN($('#input-seconds').val())) {
+			if($('#input-minutes').val() > (24 * 60) && $('#input-seconds').val() > (24 * 60 * 60)) {
+				$('#countdown .error').text('Cannot countdown over 24 hours').show();
+			} else if($('#input-minutes').val() < 1 || $('#input-seconds').val() < 1) {
+				$('#countdown .error').text('Number must be positive').show();
+			} else {
+				$('#countdown .error').hide();
+
+				window.clearTimeout(cancelCounter);
+
+				minutes = $('#input-minutes').val() * 60;
+				seconds = $('#input-seconds').val();
+
+				count = +minutes + +seconds;
+
+				countdown();
+
+				$('#btn-countdowntimer').addClass('rotating');
+
+				popout();
+			}
+		}
+	}
 
 	function countdown() {
 		cancelCountdown();

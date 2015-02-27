@@ -195,22 +195,13 @@ input {
   100% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); } }
-input[type="number"] {
-  position: relative; }
+#countdown input {
+  padding: 10px;
+  width: 50px; }
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  background: rgba(255, 255, 255, 0.7) url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAhCAYAAAAGcPEMAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyRpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoTWFjaW50b3NoKSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpBMUJGNEE3REIxOTExMUU0ODA3REQ0Rjg1RDc1NUE2QyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpBMUJGNEE3RUIxOTExMUU0ODA3REQ0Rjg1RDc1NUE2QyI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkExQkY0QTdCQjE5MTExRTQ4MDdERDRGODVENzU1QTZDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOkExQkY0QTdDQjE5MTExRTQ4MDdERDRGODVENzU1QTZDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+Y4P3tgAAAGtJREFUeNpi/P//PwO5gImBAjCqGQ2oq6v/J0szTCM+A5iIsRGXAUzEOhWbOBMpfkSXZxxNnqOaB69mFlLSNgjcvHmTEavNyBKENGJ1Ni4DsIkzEaMQp4tAWRIXVlNT+49PfjQ/01MzQIABAApYVNoAsraGAAAAAElFTkSuQmCC) no-repeat center center;
-  width: 15px;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0; }
-
-input[type="number"]::-webkit-inner-spin-button:hover,
-input[type="number"]::-webkit-inner-spin-button:active {
-  background-color: #FFF; }
+  -webkit-appearance: none; }
 
 #btn-about {
   position: relative;
