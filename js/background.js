@@ -9,6 +9,11 @@ $(function() {
 			var imageData;
 
 			if(localStorage.getItem(date) === null) {
+				for(var i = 0; i < localStorage.length; i++) {
+					if(localStorage.key(i).indexOf('/') > -1) {
+						localStorage.removeItem(localStorage.key(i));
+					}
+				}
 				var img = new Image();
 				img.crossOrigin = '';
 				var random = Math.random() * 10000;
