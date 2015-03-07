@@ -110,8 +110,10 @@ $(function() {
 
 		if(hours === '00') {
 			$('.clock h1').text(minutes + ":" + seconds);
+			document.title = minutes + ":" + seconds;
 		} else {
 			$('.clock h1').text(hours + ":" + minutes + ":" + seconds);
+			document.title = hours + ":" + minutes + ":" + seconds;
 		}
 	}
 });
