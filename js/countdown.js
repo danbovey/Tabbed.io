@@ -71,11 +71,23 @@ $(function() {
 
 	function cancelCountdown() {
 		window.clearInterval(counter);
+		window.clearInterval(counterFlashTask);
+		document.title = 'Tabbed';
 		counter = null;
 		$('.clock h1').removeClass('flashing');
 		$('#countdown-stop').removeClass('active');
 		$('#btn-countdowntimer').removeClass('rotating');
 		audio.pause();
+	}
+
+	function flashTitle() {
+		if(counterFlash === false) {
+			counterFlash = true;
+			document.title = '--:--';
+		} else {
+			counterFlash = false;
+			document.title = '00:00';
+		}
 	}
 
 	function timer() {
@@ -89,7 +101,10 @@ $(function() {
 			audio.currentTime = 0;
 			audio.play();
 
+			document.title = '00:00';
+
 			$('.clock h1').text('00:00').addClass('flashing');
+			counterFlashTask = window.setInterval(flashTitle, 500);
 
 			cancelCounter = window.setTimeout(cancelCountdown, 5700);
 			return;

@@ -16,6 +16,8 @@ var context = canvas.getContext('2d');
 var count = 0;
 var counter = null;
 var cancelCounter = null;
+var counterFlashTask = null;
+var counterFlash = false;
 var audio = document.getElementById('buzzer');
 
 // @codekit-append 'popouts.js', 'addons.js', 'background.js', 'clock.js', 'search.js', 'countdown.js';
