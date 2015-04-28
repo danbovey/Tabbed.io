@@ -24,6 +24,12 @@ $(function() {
 		}
 	});
 
+	$(window).bind('beforeunload', function() {
+		if(counter !== null) {
+			return 'A countdown timer is active, are you sure you want to leave?';
+		}
+	});
+
 	function startCountdown() {
 		minutes = $('#input-minutes').val() * 60;
 		seconds = $('#input-seconds').val();
@@ -97,6 +103,7 @@ $(function() {
 
 		if(count <= 0) {
 			window.clearInterval(counter);
+			counter = null;
 
 			audio.currentTime = 0;
 			audio.play();
