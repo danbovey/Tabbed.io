@@ -11,11 +11,11 @@ html, body {
 
 body {
   font-family: HelveticaNeue-Medium, 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  background-color: #CCC;
+  background-color: #222;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-transition: background-image 1s ease-in-out;
-          transition: background-image 1s ease-in-out; }
+  -webkit-transition: background-image 2s ease-in-out;
+          transition: background-image 2s ease-in-out; }
 
 canvas {
   display: none; }
@@ -86,8 +86,8 @@ input {
 .light .clock h1 {
   font-family: 'Lato', sans-serif; }
 
-@-webkit-keyframes blink{
-  to{
+@-webkit-keyframes blink {
+  to {
     visibility: hidden; } }
 
 @keyframes blink {
@@ -151,8 +151,8 @@ input {
   -webkit-animation: spin 2s linear infinite;
           animation: spin 2s linear infinite; }
 
-@-webkit-keyframes spin{
-  100%{
+@-webkit-keyframes spin {
+  100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg); } }
 
@@ -172,17 +172,17 @@ input {
     -webkit-animation: rotateGlass 4s infinite ease-in-out;
             animation: rotateGlass 4s infinite ease-in-out; }
 
-@-webkit-keyframes rotateGlass{
-  40%{
+@-webkit-keyframes rotateGlass {
+  40% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); }
-  50%{
+  50% {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); }
-  90%{
+  90% {
     -webkit-transform: rotate(180deg);
             transform: rotate(180deg); }
-  100%{
+  100% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg); } }
 
