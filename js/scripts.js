@@ -8,6 +8,10 @@ $(function() {
 			enabled: false,
 			url: ''
 		},
+		chromeApps: false,
+		clock: {
+			military: true
+		},
 		search: true,
 		countdownTimer: false,
 		lightFonts: true
@@ -30,9 +34,11 @@ $(function() {
 		chrome.storage.sync.set({ options: options } );
 	}
 
+	var backgroundList = {};
+
 	var canvas = document.createElement('canvas');
-	canvas.width = 1920;
-	canvas.height = 1080;
+	canvas.width = $(window).width();
+	canvas.height = $(window).height();
 	document.body.appendChild(canvas);
 	var context = canvas.getContext('2d');
 
@@ -51,6 +57,7 @@ $(function() {
 		getSearch();
 		getCountdown();
 		getLightFonts();
+		getChromeApps();
 	}
 
 	$(document).click(function() {
@@ -91,6 +98,7 @@ $(function() {
 	   }, 1000);
 	});
 
+	// Create inline SVGs so we can change the fill colour
 	$('.icon img').each(function() {
 		var $img = $(this);
 		var imgID = $img.attr('id');
@@ -133,6 +141,7 @@ $(function() {
 
 	$('#add-customwallpaper').click(function(e) {
 		options.customWallpaper.enabled = !options.customWallpaper.enabled;
+
 		saveSync();
 		customWallpaper();
 
@@ -205,7 +214,7 @@ $(function() {
 	}
 
 	function getWallpaper() {
-		if(options.customWallpaper && options.customWallpaper.url != '') {
+		if(options.customWallpaper.enabled && options.customWallpaper.url != '') {
 			$('body').css('background-image', 'url(' + options.customWallpaper.url + ')');
 			$('#input-customwallpaper').val(options.customWallpaper.url);
 		} else {
@@ -219,52 +228,14 @@ $(function() {
 					options.background.date = date;
 					saveSync();
 
-					$.getJSON('https://unsplash.it/list', function(images) {
-						var image = images[Math.floor(Math.random() * images.length)];
-						var url = 'https://unsplash.it/1920/1080/?image=' + image.id + '&element=body';
-
-						options.background.id = image.id;
-						saveSync();
-
-						var img = new Image();
-						img.crossOrigin = '';
-						img.src = url;
-
-						var colorSum = 0;
-
-						img.onload = function() {
-							var canvas = document.createElement('canvas');
-							canvas.width = 1920;
-							canvas.height = 1080;
-							document.body.appendChild(canvas);
-							var context = canvas.getContext('2d');
-							context.drawImage(img, 0, 0);
-
-							var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
-							var data = brightnessImageData.data;
-							var r, g, b, avg;
-
-							for(var x = 0, len = data.length; x < len; x += 4) {
-								r = data[x];
-								g = data[x + 1];
-								b = data[x + 2];
-
-								avg = Math.floor((r + g + b) / 3);
-								colorSum += avg;
-							}
-
-							var brightness = Math.floor(colorSum / (this.width * this.height));
-							
-							if(brightness > 150) {
-								$('body').addClass('black');
-							} else {
-								$('body').removeClass('black');
-							}
-
-							$('body').css('background-image', 'url(' + url + ')');
-							$('#btn-refresh').delay(1000).removeClass('rotating');
-						};
-					});
+					if(backgroundList.length > 0) {
+						chooseWallpaper();
+					} else {
+						$.getJSON('https://unsplash.it/list', function(images) {
+							backgroundList = images;
+							chooseWallpaper();
+						});
+					}
 				} else {
 					var img = new Image();
 					var url = 'https://unsplash.it/1920/1080/?image=' + options.background.id + '&element=body';
@@ -286,45 +257,68 @@ $(function() {
 						var b64=btoa(raw);
 						var dataUrl = 'data:image/jpeg;base64,' + b64;
 						
-						img.src = dataUrl;
-						canvas = document.getElementsByTagName('canvas')[0];
-						context.drawImage(img, 0, 0);
-
-						var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
-						var data = brightnessImageData.data;
-						var r, g, b, avg;
-
-						for(var x = 0, len = data.length; x < len; x += 4) {
-							r = data[x];
-							g = data[x + 1];
-							b = data[x + 2];
-
-							avg = Math.floor((r + g + b) / 3);
-							colorSum += avg;
-						}
-
-						var brightness = Math.floor(colorSum / (this.width*this.height));
-						
-						if(brightness > 150) {
-							$('body').addClass('black');
-						} else {
-							$('body').removeClass('black');
-						}
-
-						$('body').css('background-image', 'url(' + url + ')');
+						getBrightness(dataUrl);
 					};
 
 					xmlHTTP.send();
-
-					var colorSum = 0;
 				}
 			}
 		}
 	}
 	getWallpaper();
 
+	function chooseWallpaper() {
+		var image = backgroundList[Math.floor(Math.random() * backgroundList.length)];
+		var url = 'https://unsplash.it/' + $(window).width() + '/' + $(window).height() + '/?image=' + image.id + '&element=body';
+
+		options.background.id = image.id;
+		saveSync();
+
+		getBrightness(url);
+	}
+
+	function getBrightness(url) {
+		var img = new Image();
+		img.crossOrigin = '';
+		img.src = url;
+
+		var colorSum = 0;
+		img.onload = function() {
+			canvas = document.getElementsByTagName('canvas')[0];
+			context.drawImage(img, 0, 0);
+
+			var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
+			var data = brightnessImageData.data;
+			var r, g, b, avg;
+
+			for(var x = 0, len = data.length; x < len; x += 4) {
+				r = data[x];
+				g = data[x + 1];
+				b = data[x + 2];
+
+				avg = Math.floor((r + g + b) / 3);
+				colorSum += avg;
+			}
+
+			var brightness = Math.floor(colorSum / (this.width * this.height));
+			
+			if(brightness > 150) {
+				$('body').addClass('black');
+			} else {
+				$('body').removeClass('black');
+			}
+
+			$('.bg').css('background-image', 'url(' + url + ')');
+			$('#btn-refresh').delay(1000).removeClass('rotating');
+
+			window.setTimeout(function() {
+				$('body').css('background-image', 'url(' + url + ')');
+			}, 1000);
+		}
+	}
+
 	$('#btn-refresh').click(function(e) {
-		options.customWallpaper = false;
+		options.customWallpaper.enabled = false;
 		options.background.id = null;
 
 		$(this).addClass('rotating');
@@ -342,7 +336,9 @@ $(function() {
 
 	$('#input-customwallpaper').keypress(function(e) {
 		if(e.keyCode == 13) {
-			localStorage.setItem('customwallpaperurl', $(this).val());
+			options.customWallpaper.url = $(this).val();
+			saveSync();
+
 			getWallpaper();
 			popout();
 		}
@@ -372,12 +368,29 @@ $(function() {
 		return blob;
 	}
 
-	var military;
-	if(localStorage.getItem('military') == 1) {
-		military = 1;
-	} else {
-		military = 0;
+	$('#add-chromeapps').click(function(e) {
+		options.chromeApps = !options.chromeApps;
+		saveSync();
+		getChromeApps();
+
+		e.preventDefault();
+	});
+
+	function getChromeApps() {
+		if(options.chromeApps) {
+			$('#btn-chromeapps').show();
+			$('#add-chromeapps img').attr('src', 'img/check.svg');
+		} else {
+			$('#btn-chromeapps').hide();
+			$('#add-chromeapps img').attr('src', 'img/uncheck.svg');
+		}
 	}
+
+	$('#btn-chromeapps').click(function(e) {
+		chrome.tabs.update({ url: 'chrome://apps' });
+
+		e.preventDefault();
+	})
 
 	function clock() {
 		if(counter === null) {
@@ -385,7 +398,7 @@ $(function() {
 			var hh = now.getHours();
 			var min = now.getMinutes();
 
-			if(military === 0) {
+			if(options.clock.military === 0) {
 				hh = hh % 12;
 				hh = hh ? hh : 12;
 				hh = hh === 0?'0'+hh:hh;
@@ -412,13 +425,7 @@ $(function() {
 
 	$('#btn-clock').click(function(e) {
 		$('.widget.clock').stop(true, true).hide().fadeIn(500);
-		if(military === 1) {
-			localStorage.setItem('military', 0);
-			military = 0;
-		} else {
-			localStorage.setItem('military', 1);
-			military = 1;
-		}
+		options.clock.military = !options.clock.military;
 		clock();
 		e.preventDefault();
 	});
@@ -545,7 +552,7 @@ $(function() {
 			return;
 		}
 
-		if(minutes > (24 * 60) && seconds > (24 * 60 * 60)) {
+		if(minutes > (24 * 60 * 60) || seconds > (24 * 60 * 60)) {
 			$('#countdown .error').text('Cannot countdown over 24 hours').show();
 		} else if(minutes < 0 || seconds < 0) {
 			$('#countdown .error').text('Number must be positive').show();
