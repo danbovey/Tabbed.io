@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<meta name="google-site-verification" content="uCuxR0frU9PCZg--mao2nhKLDtu1UCR7g06dxU5Utqc">
+
+	<title>Tabbed.io</title>
+
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/oipnokfpeckfiofafaoikkhkmhdeoebb">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-26369727-5', 'auto');
+		ga('send', 'pageview');
+	</script>
+</head>
+<body>
+	<header class="header" id="header">
+		<canvas id="stars"></canvas>
+		<div class="wrapper">
+			<div class="container">
+				<div class="col-sm-4 pull-left">
+					<h1><img src="img/logo.svg" width="50" height="50" alt=""> Tabbed</h1>
+				</div>
+				<div class="col-sm-2 pull-right navigation">
+					<nav class="nav">
+						<a href="https://github.com/danbovey/Tabbed.io">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="25px" viewBox="0 0 25 25" enable-background="new 0 0 25 25" xml:space="preserve">
+								<path fill="#FFFFFF" d="M12.503,0C5.603,0,0.008,5.595,0.008,12.497c0,5.521,3.58,10.205,8.547,11.857
+									c0.625,0.114,0.821-0.257,0.821-0.588c0-0.296,0.006-1.126,0-2.169C5.9,22.354,5.18,19.952,5.18,19.952
+									c-0.568-1.444-1.387-1.828-1.387-1.828c-1.134-0.775,0.085-0.761,0.085-0.761c1.253,0.089,1.915,1.289,1.915,1.289
+									c1.115,1.907,2.924,1.356,3.636,1.038c0.114-0.809,0.438-1.359,0.794-1.671c-2.774-0.316-5.692-1.388-5.692-6.177
+									c0-1.364,0.487-2.479,1.286-3.353C5.689,8.174,5.259,6.903,5.94,5.182c0,0,1.049-0.335,3.436,1.282
+									c0.997-0.277,2.066-0.416,3.129-0.42c1.062,0.005,2.13,0.143,3.128,0.42c2.386-1.617,3.434-1.282,3.434-1.282
+									c0.681,1.721,0.252,2.992,0.124,3.308c0.8,0.873,1.285,1.988,1.285,3.353c0,4.802-2.922,5.857-5.706,6.166
+									c0.448,0.387,0.855,1.137,0.855,2.303c0,1.562,0,3.048,0,3.458c0,0.335,0.202,0.705,0.836,0.583C21.424,22.697,25,18.017,25,12.497
+									C25,5.595,19.405,0,12.503,0z"/>
+							</svg>
+						</a>
+						<a href="https://twitter.com/tabbedio">
+							<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px" height="25px" viewBox="0 0 32 25" enable-background="new 0 0 32 25" xml:space="preserve">
+								<path fill="#FFFFFF" d="M30.194,2.93c-1.108,0.497-2.305,0.833-3.558,0.983c1.279-0.773,2.263-1.998,2.725-3.458
+									c-1.198,0.717-2.523,1.237-3.934,1.518C24.298,0.759,22.687,0,20.906,0c-3.421,0-6.195,2.798-6.195,6.249
+									c0,0.489,0.055,0.966,0.162,1.423c-5.149-0.26-9.714-2.748-12.77-6.529C1.569,2.066,1.263,3.139,1.263,4.285
+									c0,2.168,1.094,4.081,2.756,5.201c-1.015-0.033-1.97-0.314-2.805-0.782C1.213,8.73,1.213,8.757,1.213,8.783
+									c0,3.027,2.135,5.552,4.97,6.127c-0.52,0.143-1.067,0.218-1.632,0.218c-0.399,0-0.788-0.039-1.166-0.112
+									c0.789,2.483,3.076,4.29,5.787,4.34c-2.121,1.676-4.791,2.674-7.694,2.674c-0.5,0-0.993-0.029-1.478-0.087
+									c2.742,1.774,5.999,2.808,9.497,2.808c11.395,0,17.625-9.521,17.625-17.778c0-0.271-0.004-0.541-0.016-0.81
+									C28.313,5.284,29.365,4.183,30.194,2.93z"/>
+							</svg>
+						</a>
+					</nav>
+				</div>
+				<div class="col-sm-12 text-center">
+					<h2>The personalised landing page for your browser</h2>
+					<button type="button" class="install" id="btn-install">Install Chrome Extension</button>
+					<p><a href="https://chrome.google.com/webstore/detail/tabbedio-new-tab-page/oipnokfpeckfiofafaoikkhkmhdeoebb">or view on the Chrome Web Store</a></p>
+				</div>
+			</div>
+		</div>
+		<button type="button" class="scroll" id="btn-scroll">
+			<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30px" height="60px" viewBox="0 0 30 60" enable-background="new 0 0 30 60" xml:space="preserve">
+				<path id="XMLID_14_" fill="#FFFFFF" d="M14.303,3.917c-3.097,0-5.866,1.256-7.895,3.286c-2.03,2.029-3.25,4.833-3.25,7.93v29.735
+					c0,6.193,4.981,11.214,11.175,11.214c6.193,0,11.175-5.021,11.175-11.214V15.132C25.508,8.939,20.496,3.917,14.303,3.917z
+					 M15.561,24.057h-2.584V9.33h2.584V24.057z"/>
+			</svg>
+		</button>
+	</header>
+	<main class="main">
+		<section class="intro">
+			<div class="container">
+				<h2>Get a new wallpaper from unsplash.com every day</h2>
+				<h3 class="sub">A beautiful landscape or photograph as your wallpaper</h3>
+				<img src="img/laptop.jpg" alt="Tabbed running on a Macbook">
+			</div>
+		</section>
+		<section class="time">
+			<div class="container">
+				<h2>A minimalistic and clean dashboard featuring a clock and the date</h2>
+				<h3 class="sub">Tabbed replaces your new tab page with a simple landing page that you'll love</h3>
+				<img src="img/tabbed.jpg" alt="Tabbed landing page">
+			</div>
+		</section>
+		<section class="testimonial">
+			<div class="testimonial-bg"></div>
+			<div class="container">
+				<blockquote>
+					Very nice!
+				</blockquote>
+				<cite>- Dafz Thomas</cite>
+			</div>
+			<div class="text-center">
+				<button type="button" class="install">Install Chrome Extension</button>
+			</div>
+		</section>
+	</main>
+	<footer class="footer">
+		<div class="container">
+			<span>&copy; 2015 Tabbed.io</span>
+			<span class="pull-right">Created by <a href="https://danbovey.uk">Dan Bovey</a></span>
+		</div>
+	</footer>
+
+	<script src="js/script.js"></script>
+</body>
+</html>

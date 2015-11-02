@@ -1,0 +1,237 @@
+@import url(https://fonts.googleapis.com/css?family=Titillium+Web:200,400,700);
+@import "variables";
+
+@import "bootstrap/bootstrap";
+
+body {
+	font-family: 'Titillium Web', sans-serif;
+}
+
+section {
+	padding: 75px 0;
+}
+h2 {
+	text-align: center;
+}
+a {
+	text-decoration: none !important;
+	color: $blue;
+
+	&:hover, &:focus {
+		color: $pink;
+	}
+}
+.sub {
+	text-align: center;
+	color: #999;
+}
+
+canvas {
+	display: none;
+
+	@media(min-width: 540px) {
+		display: block;
+	}
+}
+
+.install {
+	padding: 10px 40px;
+	border: none;
+	outline: none;
+	background: $blue;
+	font-size: 1.5em;
+	color: #FFF;
+	transition: all 0.2s ease;
+
+	&:hover, &:focus {
+		background: $green;
+	}
+	&.green {
+		background: $green;
+
+		&:hover, &:focus {
+			background: $blue;
+		}
+	}
+}
+
+.scroll {
+	path {
+		transition: all 0.2s ease;
+		&:hover, &:focus {
+			fill: $green;
+		}
+	}
+}
+
+.header {
+	position: relative;
+	z-index: 1;
+	overflow: hidden;
+	height: 100vh;
+	background-color: #333;
+	background-image: url(https://images.unsplash.com/photo-1440635592348-167b1b30296f?fm=jpg&w=1920&h=800&q=50);
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	color: #FFF;
+
+	.wrapper {
+		position: absolute;
+		top: 0;
+		width: 100%;
+	}
+	h1 {
+		margin: 0;
+		padding: 20px 0;
+		font-weight: bold;
+	}
+	.navigation {
+		position: relative;
+		z-index: 10;
+	}
+	.nav {
+		float: right;
+		padding: 30px 0;
+		font-size: 1.2em;
+		text-transform: uppercase;
+
+		a {
+			margin-right: 20px;
+
+			&:last-child {
+				margin-right: 0;
+			}
+			&:hover, &:focus {
+				path {
+					fill: $pink;
+				}
+			}
+
+			path {
+				fill: $green;
+				transition: all 0.2s ease;
+			}
+		}
+	}
+	.install {
+		margin-top: 50px;
+	}
+	h2 {
+		padding-top: 100px;
+		font-size: 3em;
+		font-weight: 200;
+
+		@media(min-width: 970px) {
+			font-size: 4em;
+		}
+	}
+	p {
+		margin-top: 15px;
+		font-size: 1.1em;
+	}
+	a {
+		outline: none;
+		color: #FFF;
+		transition: all 0.2s ease;
+
+		&:hover, &:focus {
+			color: $pink;
+		}
+	}
+
+	.scroll {
+		position: absolute;
+		bottom: 50px;
+		left: 50%;
+		width: 100px;
+		margin-left: -50px;
+		padding: 0;
+		border: none;
+		outline: none;
+		background: none;
+
+		&:hover, &:focus {
+			fill: $green;
+		}
+	}
+}
+
+.main {
+	background: #111;
+	color: #000;
+
+	h2 {
+		color: #CCC;
+	}
+	img {
+		width: 100%;
+		margin-top: 50px;
+	}
+}
+
+.intro {
+	padding-bottom: 0;
+}
+
+.testimonial {
+	position: relative;
+	height: 80vh;
+	max-height: 600px;
+	padding: 20vh 0;
+	background-color: #111;
+	text-align: right;
+
+	.testimonial-bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background-image: url(https://images.unsplash.com/photo-1440557958969-404dc361d86f?fm=jpg&h=600&q=75&w=1920);
+		background-repeat: no-repeat;
+		background-position: center bottom;
+		background-size: cover;
+		-webkit-filter: opacity(.5);
+		filter: opacity(.5);
+	}
+
+	blockquote {
+		padding: 0;
+		padding-right: 20px;
+		border: none;
+		border-right: 5px solid #EEE;
+		font-size: 3em;
+		color: #FFF;
+	}
+	cite {
+		font-size: 1.5em;
+		color: #FFF;
+	}
+	.install {
+		position: absolute;
+		bottom: 100px;
+		width: 300px;
+		margin-left: -150px;
+		background: $pink;
+
+		&:hover, &:focus {
+			background: $green;
+		}
+		&.green {
+			background: $green;
+
+			&:hover, &:focus {
+				background: $pink;
+			}
+		}
+	}
+}
+
+.footer {
+	padding: 25px 0;
+	font-size: 1.3em;
+	font-weight: bold;
+	background: #111;
+	color: #CCC;
+}
