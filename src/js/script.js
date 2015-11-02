@@ -49,7 +49,7 @@
 
         canvas = document.getElementById('stars');
         canvas.width = width;
-        canvas.height = height * 0.7;
+        canvas.height = height;
         ctx = canvas.getContext('2d');
 
         // create points
@@ -133,7 +133,7 @@
         height = window.innerHeight;
         largeHeader.style.height = height+'px';
         canvas.width = width;
-        canvas.height = height * 0.7;
+        canvas.height = height;
     }
 
     // animation

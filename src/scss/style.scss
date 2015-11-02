@@ -64,6 +64,16 @@ canvas {
 	}
 }
 
+.landscape {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 45%;
+	background: url(../img/landscape.png) no-repeat;
+	background-size: cover;
+}
+
 .header {
 	position: relative;
 	z-index: 1;
