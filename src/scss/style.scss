@@ -65,6 +65,7 @@ canvas {
 }
 
 .landscape {
+	display: none;
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -72,6 +73,10 @@ canvas {
 	height: 45%;
 	background: url(../img/landscape.png) no-repeat;
 	background-size: cover;
+
+	@media(min-width: 540px) {
+		display: block;
+	}
 }
 
 .header {
