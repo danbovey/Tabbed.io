@@ -4,7 +4,7 @@
   "name": "Tabbed.io - New Tab Page",
   "short_name": "Tabbed.io",
   "description": "A personalised landing page for your browser",
-  "version": "1.2",
+  "version": "1.2.1",
 
   "offline_enabled": true,
 
