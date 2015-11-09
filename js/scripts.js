@@ -398,7 +398,7 @@ $(function() {
 			var hh = now.getHours();
 			var min = now.getMinutes();
 
-			if(options.clock.military === 0) {
+			if(options.clock.military === false) {
 				hh = hh % 12;
 				hh = hh ? hh : 12;
 				hh = hh === 0?'0'+hh:hh;
@@ -426,6 +426,10 @@ $(function() {
 	$('#btn-clock').click(function(e) {
 		$('.widget.clock').stop(true, true).hide().fadeIn(500);
 		options.clock.military = !options.clock.military;
+
+		console.log(options.clock.military);
+
+		saveSync();
 		clock();
 		e.preventDefault();
 	});
