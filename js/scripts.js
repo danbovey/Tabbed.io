@@ -427,8 +427,6 @@ $(function() {
 		$('.widget.clock').stop(true, true).hide().fadeIn(500);
 		options.clock.military = !options.clock.military;
 
-		console.log(options.clock.military);
-
 		saveSync();
 		clock();
 		e.preventDefault();
