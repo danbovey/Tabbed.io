@@ -87,7 +87,6 @@ $(function() {
 	$(document).mousemove(function() {
 		$('.menu').addClass('active');
 
-		var lastTimeMouseMoved = new Date().getTime();
 		window.setTimeout(function() {
 			var currentTime = new Date().getTime();
 			if(!hovering && !$('.popout').hasClass('active')) {
@@ -95,7 +94,7 @@ $(function() {
 					$('.menu').removeClass('active');
 				}
 			}
-	   }, 1000);
+		}, 1000);
 	});
 
 	// Create inline SVGs so we can change the fill colour
@@ -120,9 +119,9 @@ $(function() {
 	});
 
 	$('.icon').hover(function() {
-	    hovering = true;
+		hovering = true;
 	}, function() {
-	    hovering = false;
+		hovering = false;
 	});
 
 	$('.icon').click(function(e) {
@@ -256,7 +255,7 @@ $(function() {
 
 						var b64=btoa(raw);
 						var dataUrl = 'data:image/jpeg;base64,' + b64;
-						
+
 						getBrightness(dataUrl);
 					};
 
@@ -301,7 +300,7 @@ $(function() {
 			}
 
 			var brightness = Math.floor(colorSum / (this.width * this.height));
-			
+
 			if(brightness > 150) {
 				$('body').addClass('black');
 			} else {
