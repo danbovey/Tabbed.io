@@ -84,15 +84,14 @@ $(function() {
 		}
 	}
 
+	var mousemoveTimeout;
 	$(document).mousemove(function() {
 		$('.menu').addClass('active');
 
-		window.setTimeout(function() {
-			var currentTime = new Date().getTime();
+		clearTimeout(mousemoveTimeout);
+		mousemoveTimeout = window.setTimeout(function() {
 			if(!hovering && !$('.popout').hasClass('active')) {
-				if(currentTime - lastTimeMouseMoved > 1000) {
-					$('.menu').removeClass('active');
-				}
+				$('.menu').removeClass('active');
 			}
 		}, 1000);
 	});
@@ -416,7 +415,7 @@ $(function() {
 		}
 	}
 	clock();
-	window.setInterval(clock, 100);
+	window.setInterval(clock, 500);
 
 	var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
 	$('.date h2').text(new Date().toLocaleDateString('en-GB', options));
