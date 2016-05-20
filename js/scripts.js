@@ -69,7 +69,7 @@ $(function() {
 	});
 
 	function popout(name) {
-		if(name != undefined) {
+		if(name !== undefined) {
 			var pop = $('#' + name);
 
 			$('.popout').not(document.getElementById(name)).removeClass('active');
@@ -214,7 +214,7 @@ $(function() {
 	}
 
 	function getWallpaper() {
-		if(options.customWallpaper.enabled && options.customWallpaper.url != '') {
+		if(options.customWallpaper.enabled && options.customWallpaper.url !== '') {
 			$('body').css('background-image', 'url(' + options.customWallpaper.url + ')');
 			$('#input-customwallpaper').val(options.customWallpaper.url);
 		} else {
@@ -224,7 +224,7 @@ $(function() {
 				date = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 
 			if(options.background.date != -1) {
-				if(options.background.id == null || options.background.date == null || options.background.date != date) {
+				if(options.background.id === null || options.background.date === null || options.background.date != date) {
 					options.background.date = date;
 					saveSync();
 
@@ -314,7 +314,7 @@ $(function() {
 			window.setTimeout(function() {
 				$('body').css('background-image', 'url(' + url + ')');
 			}, 1000);
-		}
+		};
 	}
 
 	$('#btn-refresh').click(function(e) {
@@ -390,7 +390,7 @@ $(function() {
 		chrome.tabs.update({ url: 'chrome://apps' });
 
 		e.preventDefault();
-	})
+	});
 
 	function clock() {
 		if(counter === null) {
@@ -419,8 +419,8 @@ $(function() {
 	clock();
 	window.setInterval(clock, 100);
 
-	var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
-	$('.date h2').text(new Date().toLocaleDateString('en-GB', options));
+	var reps = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
+	$('.date h2').text(new Date().toLocaleDateString('en-GB', reps));
 	$('.widget.date').fadeIn(1000);
 
 	$('#btn-clock').click(function(e) {
@@ -493,7 +493,7 @@ $(function() {
 		};
 
 		var q = query.toLowerCase();
-		if(sites[q] != null) {
+		if(sites[q] !== null) {
 			return sites[q];
 		} else {
 			var re = new RegExp(' ', 'g');

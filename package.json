@@ -1,0 +1,30 @@
+{
+  "name": "tabbed.io",
+  "version": "1.2.1",
+  "description": "A Google Chrome extension which replaces your New Tab Page",
+  "main": "js/scripts.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulpkit": "0.1.0",
+    "jquery": "^2.2.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danbovey/Tabbed.io.git"
+  },
+  "keywords": [
+    "chrome",
+    "new",
+    "tab",
+    "page"
+  ],
+  "author": "Dan Bovey <dan@danbovey.uk>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danbovey/Tabbed.io/issues"
+  },
+  "homepage": "https://github.com/danbovey/Tabbed.io#readme"
+}
