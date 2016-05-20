@@ -69,7 +69,7 @@ $(function() {
 	});
 
 	function popout(name) {
-		if(name != undefined) {
+		if(name !== undefined) {
 			var pop = $('#' + name);
 
 			$('.popout').not(document.getElementById(name)).removeClass('active');
@@ -216,7 +216,7 @@ $(function() {
 	}
 
 	function getWallpaper() {
-		if(options.customWallpaper.enabled && options.customWallpaper.url != '') {
+		if(options.customWallpaper.enabled && options.customWallpaper.url !== '') {
 			setWallpaper(options.customWallpaper.url);
 			$('#input-customwallpaper').val(options.customWallpaper.url);
 		} else {
@@ -226,7 +226,7 @@ $(function() {
 				date = date.getDate() + '/' + (date.getMonth() + 1) + '/' + date.getFullYear();
 
 			if(options.background.date != -1) {
-				if(options.background.id == null || options.background.date == null || options.background.date != date) {
+				if(options.background.id === null || options.background.date === null || options.background.date != date) {
 					options.background.date = date;
 					saveSync();
 
@@ -259,10 +259,10 @@ $(function() {
 		var img = new Image();
 		img.crossOrigin = '';
 		img.src = url;
-		console.log(url);
 
 		var colorSum = 0;
 		img.onload = function() {
+			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.drawImage(img, 0, 0);
 
 			var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -279,7 +279,7 @@ $(function() {
 			}
 
 			var brightness = Math.floor(colorSum / (this.width * this.height));
-
+			
 			if(brightness > 150) {
 				$('body').addClass('black');
 			} else {
@@ -299,7 +299,7 @@ $(function() {
 					$('.bg').removeClass('active');
 				}, 1000);
 			}, 1000);
-		}
+		};
 	}
 
 	$('#btn-refresh').click(function(e) {
@@ -375,7 +375,7 @@ $(function() {
 		chrome.tabs.update({ url: 'chrome://apps' });
 
 		e.preventDefault();
-	})
+	});
 
 	function clock() {
 		if(counter === null) {
@@ -404,8 +404,8 @@ $(function() {
 	clock();
 	window.setInterval(clock, 500);
 
-	var options = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
-	$('.date h2').text(new Date().toLocaleDateString('en-GB', options));
+	var reps = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
+	$('.date h2').text(new Date().toLocaleDateString('en-GB', reps));
 	$('.widget.date').fadeIn(1000);
 
 	$('#btn-clock').click(function(e) {
@@ -478,7 +478,7 @@ $(function() {
 		};
 
 		var q = query.toLowerCase();
-		if(sites[q] != null) {
+		if(sites[q] !== null) {
 			return sites[q];
 		} else {
 			var re = new RegExp(' ', 'g');

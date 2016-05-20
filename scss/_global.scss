@@ -1,0 +1,33 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+	font-family: HelveticaNeue-Medium, 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	background-color: #222;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition: background-image 1s ease-in-out;
+	backface-visibility: hidden;
+	transform: translate3d(0, 0, 0);
+}
+
+canvas {
+	display: none;
+}
+
+input {
+	padding: 10px 20px;
+	border: 0;
+	border-bottom: 2px solid #FFF;
+	outline: none;
+	background: none;
+	color: #FFF;
+}

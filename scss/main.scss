@@ -1,0 +1,293 @@
+@import url(http://fonts.googleapis.com/css?family=Lato:100);
+@import "global";
+
+.bg {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition: background-image 1s ease-in-out;
+	backface-visibility: hidden;
+	transform: translate3d(0, 0, 0);
+
+	&.active {
+		opacity: 1;
+		transition: opacity 1s ease-in-out;
+	}
+}
+
+.top {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+}
+
+.center {
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	display: block;
+	width: 100%;
+	text-align: center;
+	-webkit-transform: translate(-50%,-50%);
+	-webkit-transform-origin: 50% 50%;
+}
+
+.bottom {
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	display: block;
+	width: 100%;
+	-webkit-transform: translate(-50%,-50%);
+	-webkit-transform-origin: 50% 50%;
+
+	.menu {
+		position: relative;
+		top: 10px;
+		padding-left: 10px;
+	}
+}
+
+.widget {
+	display: none;
+	h1, h2, h3, h4, h5, h6 {
+		font-weight: lighter;
+		text-align: center;
+		text-shadow: rgba(0, 0, 0, 0.3) 0px 1px 5px;
+		color: #FFF;
+		transition: all 1s ease-in-out;
+	}
+}
+
+.black .widget {
+	h1, h2, h3, h4, h5, h5 {
+		color: #000;
+	}
+}
+
+
+.clock {
+	display: inline-block;
+	position: relative;
+
+	h1 {
+		display: inline-block;
+		font-size: 180px;
+		letter-spacing: -5px;
+
+		&.flashing {
+			animation: blink 1s steps(5, start) infinite;
+		}
+	}
+}
+
+.light .clock h1 {
+	font-family: 'Lato', sans-serif;
+}
+
+@keyframes blink {
+	to {
+		visibility: hidden;
+	}
+}
+
+.date h2 {
+	font: 40px HelveticaNeue-Light, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	letter-spacing: -1px;
+}
+
+.light .date h2 {
+	font: 100 40px 'Lato', sans-serif;
+}
+
+.search {
+	position: absolute;
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	input {
+		width: 25%;
+		font-size: 28px;
+		transition: all 1s ease-in-out;
+	}
+}
+
+.black .search input {
+	border-color: #000;
+	color: #000;
+}
+
+.error {
+	font-size: 12px;
+	color: #FF0000;
+}
+
+.menu {
+	position: relative;
+	left: -200px;
+	padding: 10px 10px 0 20px;
+	transition: all 0.3s ease-in-out;
+
+  &.active {
+  	left: 0;
+  }
+}
+
+.icon {
+  padding: 10px 5px;
+
+  &#btn-about svg {
+  	width: 28px;
+  	height: 28px;
+  }
+
+  svg {
+  	width: 24px;
+  	height: 24px;
+    filter: drop-shadow(-2px -2px 7px #000);
+  }
+
+  svg * {
+  	transition: all 1s ease-in-out;
+  }
+}
+
+.black .icon svg * {
+	stroke: #000;
+}
+
+#btn-refresh {
+	svg {
+		margin: -12px 0 0 -12px;
+	}
+
+	&.rotating svg {
+		animation: spin 2s linear infinite;
+	}
+}
+
+@keyframes spin {
+	100% {
+		-webkit-transform: rotate(360deg); 
+		transform:rotate(360deg);
+	}
+}
+
+#btn-customwallpaper, #btn-chromeapps {
+	display: none;
+}
+
+#btn-countdowntimer {
+	display: none;
+	padding-left: 12px;
+	svg {
+		margin: -12px 0 0 -12px;
+	}
+
+	&.rotating svg {
+		animation: rotateGlass 4s infinite ease-in-out;
+	}
+}
+@keyframes rotateGlass {
+	40% {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	90% {
+		transform: rotate(180deg);
+	}
+	100% {
+		transform: rotate(0deg);
+	}
+}
+
+#countdown input {
+	padding: 10px;
+	width: 50px;
+}
+
+#countdown-stop {
+	display: none;
+	position: absolute;
+	right: -70px;
+	top: 41%;
+
+	&.active {
+		display: block;
+	}
+}
+
+input[type="number"]::-webkit-outer-spin-button, 
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+#btn-about {
+	position: relative;
+	top: 2px;
+}
+
+.popout {
+	position: absolute;
+	left: -500px;
+	z-index: 1;
+	display: inline-block;
+	padding: 10px 20px;
+	background: rgba(0, 0, 0, 0.3);
+	color: #FFF;
+	transition: all 0.4s ease-in-out;
+	a {
+		font-family: Arial, sans-serif;
+		color: #FFF;
+		color: #FFF;
+	}
+
+	&.active {
+		left: 0;
+	}
+}
+
+#addons {
+	top: 70px;
+
+	a {
+		display: block;
+		padding: 5px 0;
+		text-decoration: none;
+		span {
+			display: inline-block;
+			min-width: 150px;
+		}
+		img {
+			position: relative;
+			top: -2px;
+			vertical-align: middle;
+		}
+	}
+}
+
+#customwallpaper {
+	top: 85px;
+}
+
+#countdown {
+	bottom: 100px;
+}
+
+#about {
+	bottom: 70px;
+
+	p {
+		padding: 5px 0;
+		font-size: 14px;
+	}
+}
