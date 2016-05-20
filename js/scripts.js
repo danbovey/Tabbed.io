@@ -211,9 +211,13 @@ $(function() {
 		}
 	}
 
+	function getWallpaperUrl(imageId) {
+		return 'https://unsplash.it/' + $(window).width() + '/' + $(window).height() + '/?image=' + imageId + '&element=body';
+	}
+
 	function getWallpaper() {
 		if(options.customWallpaper.enabled && options.customWallpaper.url != '') {
-			$('body').css('background-image', 'url(' + options.customWallpaper.url + ')');
+			setWallpaper(options.customWallpaper.url);
 			$('#input-customwallpaper').val(options.customWallpaper.url);
 		} else {
 			var imageData;
@@ -235,30 +239,7 @@ $(function() {
 						});
 					}
 				} else {
-					var img = new Image();
-					var url = 'https://unsplash.it/1920/1080/?image=' + options.background.id + '&element=body';
-
-					var xmlHTTP = new XMLHttpRequest();
-					xmlHTTP.open('GET', url, true);
-					xmlHTTP.responseType = 'arraybuffer';
-
-					xmlHTTP.onload = function(e) {
-						var arr = new Uint8Array(this.response);
-
-						var raw = '';
-						var i,j,subArray,chunk = 5000;
-						for (i=0,j=arr.length; i<j; i+=chunk) {
-							subArray = arr.subarray(i,i+chunk);
-							raw += String.fromCharCode.apply(null, subArray);
-						}
-
-						var b64=btoa(raw);
-						var dataUrl = 'data:image/jpeg;base64,' + b64;
-
-						getBrightness(dataUrl);
-					};
-
-					xmlHTTP.send();
+					setWallpaper(getWallpaperUrl(options.background.id));
 				}
 			}
 		}
@@ -267,22 +248,21 @@ $(function() {
 
 	function chooseWallpaper() {
 		var image = backgroundList[Math.floor(Math.random() * backgroundList.length)];
-		var url = 'https://unsplash.it/' + $(window).width() + '/' + $(window).height() + '/?image=' + image.id + '&element=body';
 
 		options.background.id = image.id;
 		saveSync();
 
-		getBrightness(url);
+		setWallpaper(getWallpaperUrl(image.id));
 	}
 
-	function getBrightness(url) {
+	function setWallpaper(url) {
 		var img = new Image();
 		img.crossOrigin = '';
 		img.src = url;
+		console.log(url);
 
 		var colorSum = 0;
 		img.onload = function() {
-			canvas = document.getElementsByTagName('canvas')[0];
 			context.drawImage(img, 0, 0);
 
 			var brightnessImageData = context.getImageData(0, 0, canvas.width, canvas.height);
@@ -306,11 +286,18 @@ $(function() {
 				$('body').removeClass('black');
 			}
 
-			$('.bg').css('background-image', 'url(' + url + ')');
 			$('#btn-refresh').delay(1000).removeClass('rotating');
 
+			var dataUrl = canvas.toDataURL('image/png');
+
+			$('.bg').css('background-image', 'url(' + dataUrl + ')').addClass('active');
+
 			window.setTimeout(function() {
-				$('body').css('background-image', 'url(' + url + ')');
+				$('body').css('background-image', 'url(' + dataUrl + ')');
+
+				window.setTimeout(function() {
+					$('.bg').removeClass('active');
+				}, 1000);
 			}, 1000);
 		}
 	}

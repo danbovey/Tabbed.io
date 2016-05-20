@@ -13,13 +13,7 @@ body {
   font-family: HelveticaNeue-Medium, 'Helvetica Neue Medium', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   background-color: #222;
   background-repeat: no-repeat;
-  background-size: cover;
-  -webkit-transition: background-image 1s ease-in-out;
-          transition: background-image 1s ease-in-out;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0); }
+  background-size: cover; }
 
 canvas {
   display: none; }
@@ -40,12 +34,12 @@ input {
   left: 0;
   background-repeat: no-repeat;
   background-size: cover;
-  -webkit-transition: background-image 1s ease-in-out;
-          transition: background-image 1s ease-in-out;
-  -webkit-backface-visibility: hidden;
-          backface-visibility: hidden;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0); }
+  opacity: 0; }
+
+.bg.active {
+  opacity: 1;
+  -webkit-transition: opacity 1s ease-in-out;
+          transition: opacity 1s ease-in-out; }
 
 .top {
   position: absolute;
@@ -89,6 +83,7 @@ input {
             transition: all 1s ease-in-out; }
 
 .black .widget h1, .black .widget h2, .black .widget h3, .black .widget h4, .black .widget h5, .black .widget h5 {
+  text-shadow: #FFF 0px 1px 5px;
   color: #000; }
 
 .clock {
