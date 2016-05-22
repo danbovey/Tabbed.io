@@ -478,7 +478,7 @@ $(function() {
 		};
 
 		var q = query.toLowerCase();
-		if(sites[q] !== null) {
+		if(sites.hasOwnProperty(q)) {
 			return sites[q];
 		} else {
 			var re = new RegExp(' ', 'g');
