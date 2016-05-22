@@ -14,6 +14,7 @@ body {
 	background-color: #222;
 	background-repeat: no-repeat;
 	background-size: cover;
+	transition: background-image 1s ease-in-out;
 	backface-visibility: hidden;
 	transform: translate3d(0, 0, 0);
 }
