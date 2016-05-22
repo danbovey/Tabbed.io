@@ -9,9 +9,9 @@
 	left: 0;
 	background-repeat: no-repeat;
 	background-size: cover;
+	transition: background-image 1s ease-in-out;
 	backface-visibility: hidden;
 	transform: translate3d(0, 0, 0);
-	opacity: 0;
 
 	&.active {
 		opacity: 1;
@@ -175,7 +175,7 @@
 
 @keyframes spin {
 	100% {
-		-webkit-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg); 
 		transform:rotate(360deg);
 	}
 }
@@ -226,7 +226,7 @@
 	}
 }
 
-input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-outer-spin-button, 
 input[type="number"]::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
