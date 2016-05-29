@@ -7,6 +7,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
+	opacity: 0;
 	background-repeat: no-repeat;
 	background-size: cover;
 	transition: background-image 1s ease-in-out;
@@ -256,22 +257,55 @@ input[type="number"]::-webkit-inner-spin-button {
 	}
 }
 
-#addons {
+#settings {
 	top: 70px;
+	padding: 0;
 
 	a {
 		display: block;
 		padding: 5px 0;
 		text-decoration: none;
+		line-height: 17px;
+
 		span {
 			display: inline-block;
-			min-width: 150px;
 		}
 		img {
+			float: right;
 			position: relative;
 			top: -2px;
 			vertical-align: middle;
 		}
+	}
+
+	.nav {
+		button {
+			padding: 10px;
+			border: none;
+			outline: none;
+			background: none;
+			color: #FFF;
+			cursor: pointer;
+
+			&.active {
+				background: rgba(0, 0, 0, 0.2);
+			}
+		}
+	}
+
+	.tab {
+		display: none;
+		min-width: 250px;
+		padding: 10px 20px;
+		background: rgba(0, 0, 0, 0.2);
+
+		&.active {
+			display: block;
+		}
+	}
+
+	select {
+		width: calc(100% - 10px);
 	}
 }
 
@@ -289,5 +323,70 @@ input[type="number"]::-webkit-inner-spin-button {
 	p {
 		padding: 5px 0;
 		font-size: 14px;
+	}
+}
+
+.input {
+	display: block;
+	margin: 5px 5px 15px;
+
+	span {
+		display: inline-block;
+		margin-bottom: 5px;
+	}
+}
+
+.switcher {
+	display: inline-block;
+	position: relative;
+	cursor: pointer;
+	padding-left: 60px;
+	height: 20px;
+	margin: 5px 5px 15px;
+	line-height: 20px;
+	user-select: none;
+
+	input {
+		display: none;
+	}
+}
+
+.switcher-indicator { 
+	&:after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 20px;
+		width: 20px;
+		border-radius: 50%;
+		background: #D5D5D5;
+		transition: all .3s ease;
+	}
+  
+	&:before {
+		content: '';
+		position: absolute;
+		top: 8px;
+		left: 0;
+		width: 40px;
+		height: 4px;
+		border-radius: 5px;
+		background: rgba(255, 255, 255, 0.5);
+		transition: all .3s ease;
+	}
+  
+	input:checked + &::after {
+		background-color: #FFF;
+		transform: translateX(20px);
+	}
+  
+	input:checked + &::before {
+		background-color: #4F91FF;
+	}
+  
+	input:disabled + &::after,
+	input:disabled + &::before {
+		background-color: #e5e5e5;
 	}
 }
