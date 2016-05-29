@@ -426,65 +426,14 @@ $(function() {
 	});
 
 	function getLocation(query) {
-		var sites = {
-			google: 'https://google.com',
-			facebook: 'https://www.facebook.com',
-			youtube: 'https://www.youtube.com',
-			yahoo: 'https://yahoo.com',
-			wiki: 'http://wikipedia.org',
-			wikipedia: 'http://wikipedia.org',
-			twitter: 'https://twitter.com',
-			bing: 'https://bing.com',
-			pinterest: 'https://www.pinterest.com',
-			reddit: 'https://www.reddit.com',
-			wordpress: 'https://wordpress.com',
-			instagram: 'https://instagram.com',
-			tumblr: 'https://www.tumblr.com',
-			paypal: 'https://www.paypal.com',
-			imgur: 'https://imgur.com',
-			apple: 'https://www.apple.com',
-			microsoft: 'https://www.microsoft.com',
-			imdb: 'https://www.imdb.com',
-			stackoverflow: 'https://stackoverflow.com',
-			craigslist: 'http://craigslist.com',
-			netflix: 'https://www.netflix.com',
-			bbc: 'http://www.bbc.co.uk',
-			cnn: 'http://cnn.com',
-			dropbox: 'https://www.dropbox.com',
-			github: 'https://github.com',
-			gmail: 'http://mail.google.com',
-			flickr: 'https://www.flickr.com',
-			yelp: 'http://www.yelp.com',
-			godaddy: 'https://www.godaddy.com',
-			vimeo: 'https://vimeo.com',
-			etsy: 'https://www.etsy.com',
-			cnet: 'http://cnet.com',
-			slideshare: 'http://www.slideshare.com',
-			deviantart: 'http://www.deviantart.com',
-			forbes: 'http://www.forbes.com',
-			twitch: 'http://www.twitch.tv',
-			soundcloud: 'https://soundcloud.com',
-			quora: 'https://www.quora.com',
-			mailchimp: 'http://mailchimp.com',
-			'9gag': 'http://9gag.com',
-			lifehacker: 'http://www.lifehacker.com',
-			fiverr: 'https://www.fiverr.com',
-			gizmodo: 'http://www.gizmodo.com',
-			trello: 'https://trello.com',
-			evernote: 'https://evernote.com',
-			kickstarter: 'https://www.kickstarter.com',
-			outlook: 'https://outlook.com',
-			xe: 'http://www.xe.com'
-		};
+		var url = 'https://google.com/search?q=' + encodeURIComponent(query);
 
-		var q = query.toLowerCase();
-		if(sites.hasOwnProperty(q)) {
-			return sites[q];
-		} else {
-			var re = new RegExp(' ', 'g');
-			query = query.replace(re, '+');
-			return 'https://google.com/search?q=' + query;
+		// If the search doesn't have a space in it, let's use I'm Feeling Lucky!
+		if(query.indexOf(' ') == -1) {
+			url += '&btnI=';
 		}
+
+		return url;
 	}
 
 	$('#btn-countdowntimer').click(function(e) {
