@@ -1,8 +1,11 @@
 $(function() {
+	// Chrome Sync Variables
+
 	var defaults = {
 		background: {
 			id: null,
-			date: -1
+			date: -1,
+			author: null
 		},
 		customWallpaper: {
 			enabled: false,
@@ -13,7 +16,10 @@ $(function() {
 			military: true
 		},
 		search: true,
-		countdownTimer: false,
+		countdownTimer: {
+			enabled: false,
+			sound: 'analysis'
+		},
 		lightFonts: true
 	};
 
@@ -27,12 +33,30 @@ $(function() {
 			options.background.date = null;
 		}
 
+		$('#btn-clock').prop('checked', options.clock.military);
+		$('#add-customwallpaper').prop('checked', options.customWallpaper.enabled);
+		if(options.customWallpaper.enabled) {
+			$('#input-customwallpaper-container').show();
+		}
+
+		// Migrate countdownTimer settings from 1.3.1 to 1.4
+		if(options.countdownTimer === true || options.countdownTimer === false) {
+			console.log('Migrating countdownTimer settings');
+			options.countdownTimer = {
+				enabled: options.countdownTimer,
+				sound: 'analysis'
+			};
+			saveSync();
+		}
+
 		refreshOptions();
 	});
 
 	function saveSync() {
 		chrome.storage.sync.set({ options: options } );
 	}
+
+	// Local Variables
 
 	var backgroundList = {};
 
@@ -42,9 +66,10 @@ $(function() {
 	document.body.appendChild(canvas);
 	var context = canvas.getContext('2d');
 
+	var clockTask = null;
 	var count = 0;
 	var counter = null;
-	var cancelCounter = null;
+	var cancelCounterTask = null;
 	var counterFlashTask = null;
 	var counterFlash = false;
 	var audio = document.getElementById('buzzer');
@@ -127,9 +152,19 @@ $(function() {
 		e.stopPropagation();
 	});
 
-	$('#btn-addons').click(function(e) {
-		popout('addons');
+	$('#btn-settings').click(function(e) {
+		popout('settings');
 		e.preventDefault();
+	});
+
+	$('.settings-tab').click(function() {
+		var tab = $(this).data('target');
+
+		$('.settings-tab').removeClass('active');
+		$(this).addClass('active');
+
+		$('#settings .tab').removeClass('active');
+		$('#' + tab).addClass('active');
 	});
 
 	$('#btn-about').click(function(e) {
@@ -139,21 +174,14 @@ $(function() {
 
 	$('#add-customwallpaper').click(function(e) {
 		options.customWallpaper.enabled = !options.customWallpaper.enabled;
+		$('#input-customwallpaper-container').toggle();
 
 		saveSync();
 		customWallpaper();
-
-		e.preventDefault();
 	});
 
 	function customWallpaper() {
-		if(options.customWallpaper.enabled) {
-			$('#btn-customwallpaper').show();
-			$('#add-customwallpaper img').attr('src', 'img/check.svg');
-		} else {
-			$('#btn-customwallpaper').hide();
-			$('#add-customwallpaper img').attr('src', 'img/uncheck.svg');
-		}
+		$('#add-customwallpaper').prop('checked', options.customWallpaper.enabled);
 	}
 
 	$('#add-search').click(function(e) {
@@ -176,17 +204,45 @@ $(function() {
 	}
 
 	$('#add-countdowntimer').click(function(e) {
-		options.countdownTimer = !options.countdownTimer;
+		options.countdownTimer.enabled = !options.countdownTimer.enabled;
 		saveSync();
 		getCountdown();
 
 		e.preventDefault();
 	});
 
+	var testTimerTask = null;
+
+	$('#timer-sound').change(function() {
+		options.countdownTimer.sound = $(this).val();
+		saveSync();
+
+		audio.src = '/ogg/' + options.countdownTimer.sound + '.ogg';
+
+		window.clearTimeout(cancelTimerTask);
+		cancelTimerTask();
+		audio.addEventListener('canplaythrough', testTimerSound);
+	});
+
+	function testTimerSound() {
+		audio.loop = false;
+		audio.play();
+
+		testTimerTask = window.setTimeout(cancelTimerTask, audio.duration * 1000);
+	}
+
+	function cancelTimerTask() {
+		audio.pause();
+		audio.loop = true;
+		audio.removeEventListener('canplaythrough', testTimerSound);
+	}
+
 	function getCountdown() {
-		if(options.countdownTimer) {
+		if(options.countdownTimer.enabled) {
 			$('#btn-countdowntimer').show();
 			$('#add-countdowntimer img').attr('src', 'img/check.svg');
+
+			audio.src = '/ogg/' + options.countdownTimer.sound + '.ogg';
 		} else {
 			$('#btn-countdowntimer').hide();
 			$('#add-countdowntimer img').attr('src', 'img/uncheck.svg');
@@ -249,6 +305,10 @@ $(function() {
 	function chooseWallpaper() {
 		var image = backgroundList[Math.floor(Math.random() * backgroundList.length)];
 
+		options.background.author = {
+			name: image.author,
+			url: image.author_url
+		};
 		options.background.id = image.id;
 		saveSync();
 
@@ -262,6 +322,7 @@ $(function() {
 
 		var colorSum = 0;
 		img.onload = function() {
+			console.log(canvas.width, canvas.height);
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.drawImage(img, 0, 0);
 
@@ -294,6 +355,7 @@ $(function() {
 
 			window.setTimeout(function() {
 				$('body').css('background-image', 'url(' + dataUrl + ')');
+				updateAuthor();
 
 				window.setTimeout(function() {
 					$('.bg').removeClass('active');
@@ -302,12 +364,22 @@ $(function() {
 		};
 	}
 
+	function updateAuthor() {
+		if(options.background.author !== null) {
+			$('#author').removeClass('hide');
+			$('#wallpaper-author').html('<a href="' + options.background.author.url + '">' + options.background.author.name + '</a>');
+		} else {
+			$('#author').addClass('hide');
+		}
+	}
+
 	$('#btn-refresh').click(function(e) {
 		options.customWallpaper.enabled = false;
 		options.background.id = null;
 
 		$(this).addClass('rotating');
 
+		customWallpaper();
 		getWallpaper();
 		e.preventDefault();
 	});
@@ -322,10 +394,11 @@ $(function() {
 	$('#input-customwallpaper').keypress(function(e) {
 		if(e.keyCode == 13) {
 			options.customWallpaper.url = $(this).val();
-			saveSync();
+			options.background.author = null;
+			$('#author').addClass('hide');
 
+			saveSync();
 			getWallpaper();
-			popout();
 		}
 	});
 
@@ -386,7 +459,7 @@ $(function() {
 			if(options.clock.military === false) {
 				hh = hh % 12;
 				hh = hh ? hh : 12;
-				hh = hh === 0?'0'+hh:hh;
+				hh = hh === 0 ? '0' + hh : hh;
 			} else {
 				if(hh > 12) {
 					hh = hh % 24;
@@ -401,40 +474,50 @@ $(function() {
 			$('.widget.clock').fadeIn(1000);
 		}
 	}
-	clock();
-	window.setInterval(clock, 500);
+
+	function startClock() {
+		clock();
+		clockTask = window.setInterval(clock, 500);
+	}
+	startClock();
+
+	window.startClock = startClock;
+
+	function stopClock() {
+		if(clockTask !== null) {
+			window.clearInterval(clockTask);
+			clockTask = null;
+		}
+	}
+	window.stopClock = stopClock;
 
 	var reps = {weekday: "long", year: "numeric", month: "long", day: "numeric"};
 	$('.date h2').text(new Date().toLocaleDateString('en-GB', reps));
 	$('.widget.date').fadeIn(1000);
 
-	$('#btn-clock').click(function(e) {
+	$('#btn-clock').click(function() {
 		$('.widget.clock').stop(true, true).hide().fadeIn(500);
 		options.clock.military = !options.clock.military;
 
 		saveSync();
 		clock();
-		e.preventDefault();
 	});
 
 	$('#query').val('');
 
 	$('#query').keypress(function(e) {
 		if(e.keyCode === 13) {
-			window.location = getLocation($(this).val());
+			var query = $(this).val();
+			var url = 'https://google.com/search?q=' + encodeURIComponent(query);
+
+			// If the search doesn't have a space in it, let's use I'm Feeling Lucky!
+			if(query.indexOf(' ') == -1) {
+				url += '&btnI=';
+			}
+
+			window.location = url;
 		}
 	});
-
-	function getLocation(query) {
-		var url = 'https://google.com/search?q=' + encodeURIComponent(query);
-
-		// If the search doesn't have a space in it, let's use I'm Feeling Lucky!
-		if(query.indexOf(' ') == -1) {
-			url += '&btnI=';
-		}
-
-		return url;
-	}
 
 	$('#btn-countdowntimer').click(function(e) {
 		popout('countdown');
@@ -495,7 +578,7 @@ $(function() {
 		} else {
 			$('#countdown .error').hide();
 
-			window.clearTimeout(cancelCounter);
+			window.clearTimeout(cancelCounterTask);
 
 			count = minutes + seconds;
 
@@ -515,6 +598,7 @@ $(function() {
 	function cancelCountdown() {
 		window.clearInterval(counter);
 		window.clearInterval(counterFlashTask);
+		startClock();
 		document.title = 'Tabbed';
 		counter = null;
 		$('.clock h1').removeClass('flashing');
@@ -547,10 +631,13 @@ $(function() {
 
 			document.title = '00:00';
 
+			stopClock();
+
 			$('.clock h1').text('00:00').addClass('flashing');
 			counterFlashTask = window.setInterval(flashTitle, 500);
 
-			cancelCounter = window.setTimeout(cancelCountdown, 5700);
+			// Run the alarm sound for 10 loops
+			cancelCounterTask = window.setTimeout(cancelCountdown, audio.duration * 1000 * 10);
 			return;
 		}
 
