@@ -5,10 +5,12 @@ The personalised landing page for your browser
 
 ## Features
 
-* Randomise the wallpaper with a button
+* Beautiful, random wallpaper every day with the option to choose again
+* Countdown timer with customisable sounds
+* Google I'm Feeling Lucky - super fast search!
 * Time and date settings
-* Countdown timer
-* Google search
-* Add your own custom wallpaper
+* Access to Chrome Apps page
+* Custom wallpapers via URL (even import background GIFs!)
+* Syncs all of these settings and get the same wallpaper per day across your devices
 
 ###[Download for Google Chrome](https://chrome.google.com/webstore/detail/tabbedio/oipnokfpeckfiofafaoikkhkmhdeoebb)

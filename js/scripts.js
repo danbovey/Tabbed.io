@@ -322,7 +322,6 @@ $(function() {
 
 		var colorSum = 0;
 		img.onload = function() {
-			console.log(canvas.width, canvas.height);
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.drawImage(img, 0, 0);
 
