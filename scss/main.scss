@@ -280,7 +280,8 @@ input[type="number"]::-webkit-inner-spin-button {
 
 	.nav {
 		button {
-			padding: 10px;
+			position: relative;
+			padding: 10px 10px 10px 40px;
 			border: none;
 			outline: none;
 			background: none;
@@ -289,6 +290,12 @@ input[type="number"]::-webkit-inner-spin-button {
 
 			&.active {
 				background: rgba(0, 0, 0, 0.2);
+			}
+
+			img {
+				position: absolute;
+				top: 5px;
+				left: 10px;
 			}
 		}
 	}
@@ -304,7 +311,8 @@ input[type="number"]::-webkit-inner-spin-button {
 		}
 	}
 
-	select {
+	select, input[type="text"] {
+		display: block;
 		width: calc(100% - 10px);
 	}
 }

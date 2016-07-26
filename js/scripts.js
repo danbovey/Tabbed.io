@@ -33,8 +33,10 @@ $(function() {
 			options.background.date = null;
 		}
 
-		if(options.clock.military === false) {
-			$('#btn-clock').prop('checked', false);
+		$('#btn-clock').prop('checked', options.clock.military);
+		$('#add-customwallpaper').prop('checked', options.customWallpaper.enabled);
+		if(options.customWallpaper.enabled) {
+			$('#input-customwallpaper-container').show();
 		}
 
 		// Migrate countdownTimer settings from 1.3.1 to 1.4
@@ -172,23 +174,14 @@ $(function() {
 
 	$('#add-customwallpaper').click(function(e) {
 		options.customWallpaper.enabled = !options.customWallpaper.enabled;
-
-		$('#author').addClass('hide');
+		$('#input-customwallpaper-container').toggle();
 
 		saveSync();
 		customWallpaper();
-
-		e.preventDefault();
 	});
 
 	function customWallpaper() {
-		if(options.customWallpaper.enabled) {
-			$('#btn-customwallpaper').show();
-			$('#add-customwallpaper img').attr('src', 'img/check.svg');
-		} else {
-			$('#btn-customwallpaper').hide();
-			$('#add-customwallpaper img').attr('src', 'img/uncheck.svg');
-		}
+		$('#add-customwallpaper').prop('checked', options.customWallpaper.enabled);
 	}
 
 	$('#add-search').click(function(e) {
@@ -329,6 +322,7 @@ $(function() {
 
 		var colorSum = 0;
 		img.onload = function() {
+			console.log(canvas.width, canvas.height);
 			context.clearRect(0, 0, canvas.width, canvas.height);
 			context.drawImage(img, 0, 0);
 
@@ -385,6 +379,7 @@ $(function() {
 
 		$(this).addClass('rotating');
 
+		customWallpaper();
 		getWallpaper();
 		e.preventDefault();
 	});
@@ -400,10 +395,10 @@ $(function() {
 		if(e.keyCode == 13) {
 			options.customWallpaper.url = $(this).val();
 			options.background.author = null;
-			saveSync();
+			$('#author').addClass('hide');
 
+			saveSync();
 			getWallpaper();
-			popout();
 		}
 	});
 

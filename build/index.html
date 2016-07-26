@@ -14,16 +14,22 @@
 		<div class="top">
 			<div class="menu">
 				<a href="#" class="icon" id="btn-refresh" title="Change Wallpaper"><img src="img/refresh.svg" alt="Change Wallpaper" width="24" height="24"></a>
-				<a href="#" class="icon" id="btn-customwallpaper" title="Custom Wallpaper"><img src="img/photo.svg" alt="Custom Wallpaper" width="24" height="24"></a>
 				<a href="chrome://apps" class="icon" id="btn-chromeapps" title="Chrome Apps"><img src="img/apps.svg" alt="Chrome Apps" width="24" height="24"></a>
 				<a href="#" class="icon" id="btn-settings" title="Settings"><img src="img/settings.svg" alt="Settings" width="24" height="24"></a>
 			</div>
 			<div id="settings" class="popout">
 				<nav class="nav">
-					<button type="button" class="settings-tab active" data-target="general">General</button>
-					<button type="button" class="settings-tab" data-target="addons">Addons</button>
+					<button type="button" class="settings-tab active" data-target="tab-general">
+						<img src="img/general.svg" width="24" height="24"> General
+					</button>
+					<button type="button" class="settings-tab" data-target="tab-wallpaper">
+						<img src="img/photo.svg" width="24" height="24"> Wallpaper
+					</button>
+					<button type="button" class="settings-tab" data-target="tab-addons">
+						<img src="img/addons.svg" width="24" height="24"> Addons
+					</button>
 				</nav>
-				<div class="tab active" id="general">
+				<div class="tab active" id="tab-general">
 					<label class="switcher">
 						<input type="checkbox" id="btn-clock" checked="checked">
 						<div class="switcher-indicator"></div>
@@ -48,17 +54,23 @@
 						</select>
 					</label>
 				</div>
-				<div class="tab" id="addons">
-					<a href="#" id="add-customwallpaper"><span>Custom Wallpaper</span> <img src="img/uncheck.svg" alt="" width="16" height="16"></a>
+				<div class="tab" id="tab-wallpaper">
+					<label class="switcher">
+						<input type="checkbox" id="add-customwallpaper">
+						<div class="switcher-indicator"></div>
+						<span>Use Custom wallpaper</span>
+					</label>
+					<label class="input" id="input-customwallpaper-container" style="display:none">
+						<span>Custom Wallpaper URL</span>
+						<input type="text" id="input-customwallpaper" placeholder="Press enter to save">
+					</label>
+				</div>
+				<div class="tab" id="tab-addons">
 					<a href="#" id="add-search"><span>Google Search</span> <img src="img/uncheck.svg" alt="" width="16" height="16"></a>
 					<a href="#" id="add-countdowntimer"><span>Countdown Timer</span>  <img src="img/uncheck.svg" alt="" width="16" height="16"></a>
 					<a href="#" id="add-lightfonts"><span>Light Fonts</span> <img src="img/uncheck.svg" alt="" width="16" height="16"></a>
 					<a href="#" id="add-chromeapps"><span>Chrome Apps</span> <img src="img/uncheck.svg" alt="" width="16" height="16"></a>
 				</div>
-			</div>
-			<div id="customwallpaper" class="popout">
-				<p>Custom Wallpaper URL</p>
-				<input type="text" id="input-customwallpaper" placeholder="http://">
 			</div>
 		</div>
 		<div class="center">
