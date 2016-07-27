@@ -1,6 +1,6 @@
 {
   "name": "tabbed.io",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "A Google Chrome extension which replaces your New Tab Page",
   "main": "js/scripts.js",
   "dependencies": {},
