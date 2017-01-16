@@ -194,11 +194,11 @@ $(function() {
 
 	function getSearch() {
 		if(options.search) {
-			$('.search').fadeIn();
+			$('.search').stop(true).fadeIn();
 			$('#add-search img').attr('src', 'img/check.svg');
 			$('#query').focus();
 		} else {
-			$('.search').fadeOut();
+			$('.search').stop(true).fadeOut();
 			$('#add-search img').attr('src', 'img/uncheck.svg');
 		}
 	}
