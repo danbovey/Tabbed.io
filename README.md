@@ -1,7 +1,7 @@
 ![Tabbed.io logo](http://i.imgur.com/aQrCcrU.png)
 # Tabbed.io
 
-![Chrome Web Store](https://img.shields.io/badge/users-300%2B-brightgreen.svg?style=flat-square)
+![Chrome Web Store](https://img.shields.io/badge/users-400%2B-brightgreen.svg?style=flat-square)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/rating/oipnokfpeckfiofafaoikkhkmhdeoebb.svg?style=flat-square)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/rating-count/oipnokfpeckfiofafaoikkhkmhdeoebb.svg?style=flat-square)
 
