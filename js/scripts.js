@@ -470,7 +470,7 @@ $(function() {
 			var time = hh + ":" + min;
 
 			$('.clock h1').text(time);
-			$('.widget.clock').fadeIn(1000);
+			$('.widget.clock').fadeIn(1000).css('display', 'inline-block');
 		}
 	}
 
